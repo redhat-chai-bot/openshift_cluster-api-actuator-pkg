@@ -80,11 +80,30 @@ linters:
         text: 'SA1019: .*sigs\.k8s\.io/cluster-api/util/deprecated/v1beta1/conditions.* is deprecated:'
       - linters:
           - goconst
-        path: ^testutils/
+        path: ^testutils/resourcebuilder/
+      - linters:
+          - goconst
+        path: ^testutils/(conditions|logger|matchers)_test[.]go$
+      # Compatibility builders intentionally exercise CAPI's deprecated status
+      # fields until the corresponding v1beta1 fixtures can be removed.
       - linters:
           - staticcheck
-        path: ^testutils/resourcebuilder/
-        text: 'SA1019: .* is deprecated:'
+        path: ^testutils/resourcebuilder/cluster-api/core/
+        text: 'SA1019: sigs[.]k8s[.]io/cluster-api/errors is deprecated:'
+      - linters:
+          - staticcheck
+        path: ^testutils/resourcebuilder/cluster-api/core/v1beta2/
+        text: 'SA1019: (sigs[.]k8s[.]io/cluster-api/api/core/v1beta2[.](Condition|Conditions)|[(]sigs[.]k8s[.]io/cluster-api/api/core/v1beta2[.](ClusterV1Beta1DeprecatedStatus|MachineDeprecatedStatus|MachineV1Beta1DeprecatedStatus|MachineSetV1Beta1DeprecatedStatus)[)][.](AvailableReplicas|Conditions|FailureMessage|FailureReason|FullyLabeledReplicas|ReadyReplicas|V1Beta1)) is deprecated:'
+      # Provider fixtures retain deprecated failure/ready fields to validate
+      # compatibility with their existing v1beta1 APIs.
+      - linters:
+          - staticcheck
+        path: ^testutils/resourcebuilder/cluster-api/infrastructure/openstack/v1beta1/
+        text: 'SA1019: [(]sigs[.]k8s[.]io/cluster-api-provider-openstack/api/v1beta1[.](OpenStackClusterStatus|OpenStackMachineStatus)[)][.](FailureMessage|FailureReason|Ready) is deprecated:'
+      - linters:
+          - staticcheck
+        path: ^testutils/resourcebuilder/cluster-api/infrastructure/powervs/v1beta2/
+        text: 'SA1019: [(]sigs[.]k8s[.]io/cluster-api-provider-ibmcloud/api/v1beta2[.]IBMPowerVSMachineStatus[)][.](FailureMessage|FailureReason) is deprecated:'
     paths:
       - third_party$
       - builtin$

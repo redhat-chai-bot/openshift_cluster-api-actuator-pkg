@@ -39,6 +39,54 @@ for module in ${modules}; do
   fi
 done
 
-# Create unified vendor directory
+# Create the unified workspace vendor directory and the module-local vendor
+# directory used by the testutils tool entrypoints.
 echo "Creating unified vendor directory..."
 go work vendor -v
+
+echo "Creating testutils vendor directory..."
+(cd testutils && GOWORK=off go mod vendor)
+
+# These upstream documentation files contain trailing whitespace (and, for
+# recvcheck, no final newline). Normalize the generated copies so they satisfy
+# this repository's whitespace checks and repeated vendoring is deterministic.
+normalized_files=(
+  vendor/github.com/go-openapi/jsonpointer/README.md
+  vendor/github.com/pelletier/go-toml/v2/README.md
+  vendor/github.com/raeperd/recvcheck/README.md
+  testutils/vendor/github.com/go-openapi/jsonpointer/README.md
+  testutils/vendor/github.com/go-openapi/swag/mangling/BENCHMARK.md
+  testutils/vendor/github.com/dlclark/regexp2/v2/README.md
+  testutils/vendor/github.com/pelletier/go-toml/v2/README.md
+  testutils/vendor/github.com/pelletier/go-toml/v2/test-go-versions.sh
+  testutils/vendor/github.com/raeperd/recvcheck/README.md
+  testutils/vendor/github.com/ryancurrah/gomodguard/v2/README.md
+  testutils/vendor/github.com/alecthomas/chroma/v2/lexers/embedded/lilypond.xml
+  testutils/vendor/go.uber.org/zap/CHANGELOG.md
+)
+for normalized_file in "${normalized_files[@]}"; do
+  if [[ -f "${normalized_file}" ]]; then
+    sed -i -e 's/[[:blank:]]*$//' "${normalized_file}"
+  fi
+done
+
+# A few newly vendored documentation/schema files end with an extra blank line.
+trimmed_files=(
+  testutils/vendor/charm.land/lipgloss/v2/.goreleaser.yml
+  testutils/vendor/github.com/alecthomas/chroma/v2/lexers/embedded/lilypond.xml
+  testutils/vendor/k8s.io/api/lifecycle/v1alpha1/generated.proto
+  testutils/vendor/k8s.io/api/scheduling/v1alpha3/generated.proto
+  testutils/vendor/k8s.io/api/storagemigration/v1beta1/generated.proto
+)
+for trimmed_file in "${trimmed_files[@]}"; do
+  if [[ -f "${trimmed_file}" ]]; then
+    sed -i -e '${/^$/d;}' "${trimmed_file}"
+  fi
+done
+
+# Preserve the upstream Markdown heading while avoiding a seven-equals line
+# that git mistakes for a merge-conflict marker in a newly vendored file.
+sed -i -e 's/^=======$/======/' testutils/vendor/github.com/stretchr/testify/internal/spew/README.md
+
+# Normalize mixed space/tab indentation in the vendored help transcript.
+sed -i -e 's/^    \t/        /' testutils/vendor/github.com/ryancurrah/gomodguard/v2/README.md

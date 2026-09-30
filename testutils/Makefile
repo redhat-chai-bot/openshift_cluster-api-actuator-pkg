@@ -6,6 +6,7 @@ GOPROXY ?=
 export GOPROXY
 
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
+# Keep 1.36.2 until the OpenShift envtest index publishes Linux/amd64 1.37 assets.
 ENVTEST_K8S_VERSION = 1.36.2
 
 PROJECT_DIR := $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))

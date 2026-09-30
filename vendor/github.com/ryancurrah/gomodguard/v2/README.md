@@ -12,7 +12,7 @@ Allow and block list linter for direct Go module dependencies. This is useful fo
 
 ## Description
 
-Allowed and blocked modules are defined in a `./.gomodguard.yaml` or `~/.gomodguard.yaml` file. 
+Allowed and blocked modules are defined in a `./.gomodguard.yaml` or `~/.gomodguard.yaml` file.
 
 Modules can be allowed by module or prefix name. When allowed modules are specified any modules not in the allowed configuration are blocked.
 
@@ -149,25 +149,25 @@ Commands:
 
 Flags:
   -f string
-    	Report results to the specified file. A report type must also be specified
+        Report results to the specified file. A report type must also be specified
   -file string
 
   -h	Show this help text
   -help
 
   -i int
-    	Exit code when issues were found (default 2)
+        Exit code when issues were found (default 2)
   -issues-exit-code int
-    	 (default 2)
+         (default 2)
   -n	Don't lint test files
   -no-test
 
   -r string
-    	Report results to one of the following formats: checkstyle. A report file destination must also be specified
+        Report results to one of the following formats: checkstyle. A report file destination must also be specified
   -report string
 
   -version
-    	Print the version
+        Print the version
 ```
 
 ## Example

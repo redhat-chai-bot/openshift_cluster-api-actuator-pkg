@@ -52,8 +52,12 @@ echo "Creating testutils vendor directory..."
 # this repository's whitespace checks and repeated vendoring is deterministic.
 normalized_files=(
   vendor/github.com/go-openapi/jsonpointer/README.md
+  vendor/github.com/dlclark/regexp2/v2/README.md
   vendor/github.com/pelletier/go-toml/v2/README.md
+  vendor/github.com/pelletier/go-toml/v2/test-go-versions.sh
   vendor/github.com/raeperd/recvcheck/README.md
+  vendor/github.com/ryancurrah/gomodguard/v2/README.md
+  vendor/github.com/alecthomas/chroma/v2/lexers/embedded/lilypond.xml
   testutils/vendor/github.com/go-openapi/jsonpointer/README.md
   testutils/vendor/github.com/go-openapi/swag/mangling/BENCHMARK.md
   testutils/vendor/github.com/dlclark/regexp2/v2/README.md
@@ -72,10 +76,16 @@ done
 
 # A few newly vendored documentation/schema files end with an extra blank line.
 trimmed_files=(
+  vendor/charm.land/lipgloss/v2/.goreleaser.yml
+  vendor/github.com/alecthomas/chroma/v2/lexers/embedded/lilypond.xml
+  vendor/k8s.io/api/lifecycle/v1alpha1/generated.proto
+  vendor/k8s.io/api/scheduling/v1alpha3/generated.proto
+  vendor/k8s.io/api/storagemigration/v1/generated.proto
   testutils/vendor/charm.land/lipgloss/v2/.goreleaser.yml
   testutils/vendor/github.com/alecthomas/chroma/v2/lexers/embedded/lilypond.xml
   testutils/vendor/k8s.io/api/lifecycle/v1alpha1/generated.proto
   testutils/vendor/k8s.io/api/scheduling/v1alpha3/generated.proto
+  testutils/vendor/k8s.io/api/storagemigration/v1/generated.proto
   testutils/vendor/k8s.io/api/storagemigration/v1beta1/generated.proto
 )
 for trimmed_file in "${trimmed_files[@]}"; do
@@ -86,7 +96,9 @@ done
 
 # Preserve the upstream Markdown heading while avoiding a seven-equals line
 # that git mistakes for a merge-conflict marker in a newly vendored file.
+sed -i -e 's/^=======$/======/' vendor/github.com/stretchr/testify/internal/spew/README.md
 sed -i -e 's/^=======$/======/' testutils/vendor/github.com/stretchr/testify/internal/spew/README.md
 
 # Normalize mixed space/tab indentation in the vendored help transcript.
+sed -i -e 's/^    \t/        /' vendor/github.com/ryancurrah/gomodguard/v2/README.md
 sed -i -e 's/^    \t/        /' testutils/vendor/github.com/ryancurrah/gomodguard/v2/README.md

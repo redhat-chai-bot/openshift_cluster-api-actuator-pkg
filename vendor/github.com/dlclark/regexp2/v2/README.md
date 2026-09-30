@@ -199,7 +199,7 @@ The default behavior of `regexp2` is to match the .NET regexp engine, however th
 * change singleline behavior for `$` to only match end of string (like RE2) (see [#24](https://github.com/dlclark/regexp2/issues/24))
 * change the character classes `\d` `\s` and `\w` to match the same characters as RE2. NOTE: if you also use the `ECMAScript` option then this will change the `\s` character class to match ECMAScript instead of RE2.  ECMAScript allows more whitespace characters in `\s` than RE2 (but still fewer than the the default behavior).
 * allow character escape sequences to have defaults. For example, by default `\_` isn't a known character escape and will fail to compile, but in RE2 mode it will match the literal character `_`
- 
+
 ```go
 re := regexp2.MustCompile(`Your RE2-compatible pattern`, regexp2.RE2)
 if isMatch, _ := re.MatchString(`Something to match`); isMatch {
@@ -230,11 +230,11 @@ deadline for the match. The performance impact is as follows.
     is reached. E.g., if you set a timeout of one minute the load will persist
     for approximately a minute even if the match finishes quickly.
 
-See [PR #58](https://github.com/dlclark/regexp2/pull/58) for more details and 
+See [PR #58](https://github.com/dlclark/regexp2/pull/58) for more details and
 alternatives considered.
 
 ## Goroutine leak error
-If you're using a library during unit tests (e.g. https://github.com/uber-go/goleak) that validates all goroutines are exited then you'll likely get an error if you or any of your dependencies use regex's with a MatchTimeout. 
+If you're using a library during unit tests (e.g. https://github.com/uber-go/goleak) that validates all goroutines are exited then you'll likely get an error if you or any of your dependencies use regex's with a MatchTimeout.
 To remedy the problem you'll need to tell the unit test to wait until the backgroup timeout goroutine is exited.
 
 ```go
@@ -251,7 +251,7 @@ func TestMain(m *testing.M) {
     // setup
     // ...
 
-    // run 
+    // run
     m.Run()
 
     //tear down

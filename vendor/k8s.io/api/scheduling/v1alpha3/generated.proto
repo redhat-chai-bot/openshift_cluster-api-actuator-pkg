@@ -1350,4 +1350,3 @@ message WorkloadSpec {
   // +k8s:update=NoRemoveItem
   repeated CompositePodGroupTemplate compositePodGroupTemplates = 3;
 }
-

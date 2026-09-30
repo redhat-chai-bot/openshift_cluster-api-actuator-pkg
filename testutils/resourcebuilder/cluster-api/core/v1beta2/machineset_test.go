@@ -25,7 +25,6 @@ import (
 	"k8s.io/utils/ptr"
 	clusterv1 "sigs.k8s.io/cluster-api/api/core/v1beta2"
 
-	//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 	capierrors "sigs.k8s.io/cluster-api/errors"
 )
 
@@ -199,7 +198,6 @@ var _ = Describe("MachineSet", func() {
 		It("should return the custom value when specified", func() {
 			availableReplicas := int32(5)
 			machineSet := MachineSet().WithStatusV1Beta1AvailableReplicas(availableReplicas).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(machineSet.Status.Deprecated.V1Beta1.AvailableReplicas).To(Equal(availableReplicas))
 		})
 	})
@@ -210,7 +208,6 @@ var _ = Describe("MachineSet", func() {
 				{Type: "Ready", Status: corev1.ConditionTrue},
 			}
 			machineSet := MachineSet().WithStatusV1Beta1Conditions(conditions).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(machineSet.Status.Deprecated.V1Beta1.Conditions).To(Equal(conditions))
 		})
 	})
@@ -219,7 +216,6 @@ var _ = Describe("MachineSet", func() {
 		It("should return the custom value when specified and not nil", func() {
 			message := "test error"
 			machineSet := MachineSet().WithStatusV1Beta1FailureMessage(message).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(*machineSet.Status.Deprecated.V1Beta1.FailureMessage).To(Equal(message))
 		})
 	})
@@ -228,7 +224,6 @@ var _ = Describe("MachineSet", func() {
 		It("should return the custom value when specified and not nil", func() {
 			reason := capierrors.InvalidConfigurationMachineSetError
 			machineSet := MachineSet().WithStatusV1Beta1FailureReason(reason).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(*machineSet.Status.Deprecated.V1Beta1.FailureReason).To(Equal(reason))
 		})
 	})
@@ -237,7 +232,6 @@ var _ = Describe("MachineSet", func() {
 		It("should return the custom value when specified", func() {
 			fullyLabeledReplicas := int32(5)
 			machineSet := MachineSet().WithStatusV1Beta1FullyLabeledReplicas(fullyLabeledReplicas).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(machineSet.Status.Deprecated.V1Beta1.FullyLabeledReplicas).To(Equal(fullyLabeledReplicas))
 		})
 	})
@@ -254,7 +248,6 @@ var _ = Describe("MachineSet", func() {
 		It("should return the custom value when specified", func() {
 			readyReplicas := int32(5)
 			machineSet := MachineSet().WithStatusV1Beta1ReadyReplicas(readyReplicas).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(machineSet.Status.Deprecated.V1Beta1.ReadyReplicas).To(Equal(readyReplicas))
 		})
 	})

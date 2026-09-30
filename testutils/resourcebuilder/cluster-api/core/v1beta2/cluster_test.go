@@ -25,7 +25,6 @@ import (
 	"k8s.io/utils/ptr"
 	clusterv1 "sigs.k8s.io/cluster-api/api/core/v1beta2"
 
-	//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 	capierrors "sigs.k8s.io/cluster-api/errors"
 )
 
@@ -199,7 +198,6 @@ var _ = Describe("Cluster", func() {
 				},
 			}
 			cluster := Cluster().WithV1Beta1Conditions(conditions).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(cluster.Status.Deprecated.V1Beta1.Conditions).To(Equal(conditions))
 		})
 	})
@@ -227,7 +225,6 @@ var _ = Describe("Cluster", func() {
 		It("should return the custom value when specified", func() {
 			message := "Test failure message"
 			cluster := Cluster().WithV1Beta1FailureMessage(message).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(*cluster.Status.Deprecated.V1Beta1.FailureMessage).To(Equal(message))
 		})
 	})
@@ -236,7 +233,6 @@ var _ = Describe("Cluster", func() {
 		It("should return the custom value when specified", func() {
 			reason := capierrors.InvalidConfigurationClusterError
 			cluster := Cluster().WithV1Beta1FailureReason(reason).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(*cluster.Status.Deprecated.V1Beta1.FailureReason).To(Equal(reason))
 		})
 	})

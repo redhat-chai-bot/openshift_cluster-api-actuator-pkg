@@ -197,7 +197,7 @@ func GetGCPCredentialsFromInfrastructure(ctx context.Context, cl client.Client) 
 	infra := &configv1.Infrastructure{}
 
 	err := cl.Get(ctx, client.ObjectKey{
-		Name: "cluster",
+		Name: GlobalInfrastuctureName,
 	}, infra)
 	if err != nil {
 		return "", "", fmt.Errorf("failed to get infrastructure object: %w", err)

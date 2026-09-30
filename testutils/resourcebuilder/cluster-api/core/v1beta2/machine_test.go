@@ -27,7 +27,6 @@ import (
 	"k8s.io/utils/ptr"
 	clusterv1 "sigs.k8s.io/cluster-api/api/core/v1beta2"
 
-	//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 	capierrors "sigs.k8s.io/cluster-api/errors"
 )
 
@@ -247,7 +246,6 @@ var _ = Describe("Machine", func() {
 		It("should have the correct conditions when set", func() {
 			condition := clusterv1.Condition{Type: "Ready", Status: corev1.ConditionTrue}
 			machine := Machine().WithV1Beta1Conditions([]clusterv1.Condition{condition}).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(machine.Status.Deprecated.V1Beta1.Conditions).To(HaveLen(1))
 		})
 	})
@@ -256,7 +254,6 @@ var _ = Describe("Machine", func() {
 		It("should have the correct failure reason when set", func() {
 			reason := capierrors.InvalidConfigurationMachineError
 			machine := Machine().WithFailureReason(&reason).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(*machine.Status.Deprecated.V1Beta1.FailureReason).To(Equal(reason))
 		})
 	})
@@ -265,7 +262,6 @@ var _ = Describe("Machine", func() {
 		It("should have the correct failure message when set", func() {
 			message := "test-fail-msg"
 			machine := Machine().WithFailureMessage(&message).Build()
-			//nolint:staticcheck // Ignore SA1019 (deprecation) until v1beta2.
 			Expect(*machine.Status.Deprecated.V1Beta1.FailureMessage).To(Equal(message))
 		})
 	})

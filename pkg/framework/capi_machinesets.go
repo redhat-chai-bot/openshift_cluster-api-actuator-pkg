@@ -62,13 +62,13 @@ func UpdateCAPIMachineSetName(msName string, params CAPIMachineSetParams) CAPIMa
 func CreateCAPIMachineSet(ctx context.Context, cl client.Client, params CAPIMachineSetParams) (*clusterv1beta1.MachineSet, error) {
 	By(fmt.Sprintf("Creating MachineSet %q", params.msName))
 	selector := metav1.LabelSelector{
-		MatchLabels: map[string]string{"cluster.x-k8s.io/cluster-name": params.clusterName, "cluster.x-k8s.io/set-name": params.msName},
+		MatchLabels: map[string]string{capiClusterNameLabel: params.clusterName, "cluster.x-k8s.io/set-name": params.msName},
 	}
 	userDataSecret := "worker-user-data"
 	template := clusterv1beta1.MachineTemplateSpec{
 		ObjectMeta: clusterv1beta1.ObjectMeta{
 			Labels: map[string]string{
-				"cluster.x-k8s.io/cluster-name":  params.clusterName,
+				capiClusterNameLabel:             params.clusterName,
 				"cluster.x-k8s.io/set-name":      params.msName,
 				"node-role.kubernetes.io/worker": "",
 			},
@@ -81,7 +81,7 @@ func CreateCAPIMachineSet(ctx context.Context, cl client.Client, params CAPIMach
 			InfrastructureRef: params.infrastructureRef,
 		},
 	}
-	ms := capiv1resourcebuilder.MachineSet().WithName(params.msName).WithNamespace(ClusterAPINamespace).WithReplicas(params.replicas).WithClusterName(params.clusterName).WithSelector(selector).WithTemplate(template).WithLabels(map[string]string{"cluster.x-k8s.io/cluster-name": params.clusterName}).Build()
+	ms := capiv1resourcebuilder.MachineSet().WithName(params.msName).WithNamespace(ClusterAPINamespace).WithReplicas(params.replicas).WithClusterName(params.clusterName).WithSelector(selector).WithTemplate(template).WithLabels(map[string]string{capiClusterNameLabel: params.clusterName}).Build()
 
 	if params.failureDomain != "" {
 		ms.Spec.Template.Spec.FailureDomain = &params.failureDomain

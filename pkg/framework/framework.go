@@ -35,6 +35,8 @@ const (
 	MachineAPINamespace     = "openshift-machine-api"
 	ClusterAPINamespace     = "openshift-cluster-api"
 	GlobalInfrastuctureName = "cluster"
+	capiClusterNameLabel    = "cluster.x-k8s.io/cluster-name"
+	machineAPIVersion       = "machine.openshift.io/v1beta1"
 	WorkerNodeRoleLabel     = "node-role.kubernetes.io/worker"
 	RetryShort              = 1 * time.Second
 	RetryMedium             = 5 * time.Second

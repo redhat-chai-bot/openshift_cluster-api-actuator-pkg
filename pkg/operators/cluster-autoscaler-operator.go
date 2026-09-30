@@ -30,6 +30,8 @@ import (
 	"github.com/openshift/cluster-api-actuator-pkg/pkg/framework/gatherer"
 )
 
+const invalidTestValue = "test"
+
 var _ = Describe("Cluster autoscaler operator should", framework.LabelAutoscaler, func() {
 	var (
 		client   runtimeclient.Client
@@ -91,7 +93,7 @@ var _ = Describe("Cluster autoscaler operator should", framework.LabelAutoscaler
 				ScaleTargetRef: caov1beta1.CrossVersionObjectReference{
 					APIVersion: "machine.openshift.io/v1beta1",
 					Kind:       "MachineSet",
-					Name:       "test",
+					Name:       invalidTestValue,
 				},
 			},
 		}

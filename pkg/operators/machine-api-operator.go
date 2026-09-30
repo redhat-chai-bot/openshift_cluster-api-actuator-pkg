@@ -201,7 +201,7 @@ var _ = Describe(
 			toUpdate := initial.DeepCopy()
 			for _, webhook := range toUpdate.Webhooks {
 				webhook.ClientConfig.CABundle = []byte("test")
-				webhook.AdmissionReviewVersions = []string{"test"}
+				webhook.AdmissionReviewVersions = []string{invalidTestValue}
 			}
 
 			Expect(framework.UpdateMutatingWebhookConfiguration(ctx, client, toUpdate)).To(Succeed(),
@@ -233,7 +233,7 @@ var _ = Describe(
 			toUpdate := initial.DeepCopy()
 			for _, webhook := range toUpdate.Webhooks {
 				webhook.ClientConfig.CABundle = []byte("test")
-				webhook.AdmissionReviewVersions = []string{"test"}
+				webhook.AdmissionReviewVersions = []string{invalidTestValue}
 			}
 
 			Expect(framework.UpdateValidatingWebhookConfiguration(ctx, client, toUpdate)).To(Succeed(),

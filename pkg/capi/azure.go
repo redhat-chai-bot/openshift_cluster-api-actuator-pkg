@@ -85,8 +85,8 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API Azure MachineSet", framewo
 			mapiMachineSpec.Zone,
 			1,
 			corev1.ObjectReference{
-				Kind:       "AzureMachineTemplate",
-				APIVersion: "infrastructure.cluster.x-k8s.io/v1beta1",
+				Kind:       azureMachineTemplateKind,
+				APIVersion: infraAPIVersion,
 				Name:       azureMachineTemplateName,
 			},
 		))
@@ -109,8 +109,8 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API Azure MachineSet", framewo
 			mapiMachineSpec.Zone,
 			1,
 			corev1.ObjectReference{
-				Kind:       "AzureMachineTemplate",
-				APIVersion: "infrastructure.cluster.x-k8s.io/v1beta1",
+				Kind:       azureMachineTemplateKind,
+				APIVersion: infraAPIVersion,
 				Name:       azureMachineTemplateName,
 			},
 		))
@@ -138,8 +138,8 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API Azure MachineSet", framewo
 			mapiMachineSpec.Zone,
 			1,
 			corev1.ObjectReference{
-				Kind:       "AzureMachineTemplate",
-				APIVersion: "infrastructure.cluster.x-k8s.io/v1beta1",
+				Kind:       azureMachineTemplateKind,
+				APIVersion: infraAPIVersion,
 				Name:       azureMachineTemplateName,
 			},
 		))
@@ -167,8 +167,8 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API Azure MachineSet", framewo
 			mapiMachineSpec.Zone,
 			1,
 			corev1.ObjectReference{
-				Kind:       "AzureMachineTemplate",
-				APIVersion: "infrastructure.cluster.x-k8s.io/v1beta1",
+				Kind:       azureMachineTemplateKind,
+				APIVersion: infraAPIVersion,
 				Name:       azureMachineTemplateName,
 			},
 		))

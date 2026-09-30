@@ -90,7 +90,7 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API GCP MachineSet", framework
 				mapiMachineSpec.Zone,
 				1,
 				corev1.ObjectReference{
-					Kind:       "GCPMachineTemplate",
+					Kind:       gcpMachineTemplateKind,
 					APIVersion: infraAPIVersion,
 					Name:       gcpMachineTemplate.Name,
 				},
@@ -126,7 +126,7 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API GCP MachineSet", framework
 				mapiMachineSpec.Zone,
 				1,
 				corev1.ObjectReference{
-					Kind:       "GCPMachineTemplate",
+					Kind:       gcpMachineTemplateKind,
 					APIVersion: infraAPIVersion,
 					Name:       gcpMachineTemplate.Name,
 				},
@@ -197,7 +197,7 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API GCP MachineSet", framework
 				mapiProviderSpec.Zone,
 				1,
 				corev1.ObjectReference{
-					Kind:       "GCPMachineTemplate",
+					Kind:       gcpMachineTemplateKind,
 					APIVersion: infraAPIVersion,
 					Name:       gcpMachineTemplate.Name,
 				},
@@ -238,7 +238,7 @@ var _ = Describe("[sig-cluster-lifecycle] Cluster API GCP MachineSet", framework
 			mapiProviderSpec.Zone,
 			1,
 			corev1.ObjectReference{
-				Kind:       "GCPMachineTemplate",
+				Kind:       gcpMachineTemplateKind,
 				APIVersion: infraAPIVersion,
 				Name:       gcpMachineTemplate.Name,
 			},
